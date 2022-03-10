@@ -50,6 +50,11 @@ class DefaultLayout extends React.Component {
                     
                     <script defer src="js/app.js" ></script>
                 </head>
+
+
+
+
+
                 <body>
                     <header>
                         <h1 className="title"> 
@@ -63,6 +68,9 @@ class DefaultLayout extends React.Component {
                      
                                  
                     </main>
+
+
+                    
                     <footer>
                        <h1>Have fun</h1>
 
@@ -72,6 +80,9 @@ class DefaultLayout extends React.Component {
                       
                     </footer>
                 </body>
+
+
+
             </html>
         )
     }
