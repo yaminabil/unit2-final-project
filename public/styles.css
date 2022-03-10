@@ -1,7 +1,7 @@
 body {
     
     /* border: solid purple; */
-    height: 100vw;
+    height: 70vw;
     font-family: 'Roboto Mono', monospace;
 }
 
@@ -21,7 +21,7 @@ body {
 }
 
 .col:hover{
-    color:green;
+    color:white;
     text-decoration: none;
     font-size: larger;
     position: relative;

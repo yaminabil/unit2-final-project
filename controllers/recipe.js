@@ -1,4 +1,5 @@
 const express = require("express");
+const { route } = require("express/lib/application");
 const { render } = require("express/lib/response");
 const Recipe = require("../models/recipe");
 
@@ -77,16 +78,17 @@ router.get ("/seed" , (req,res)=>{
        
     ]; 
 
-    Recipe.deleteMany ({}).then((data)=>{
-        Recipe.create(recipes).then((data)=>{
-            res.json(data);
-        })
-    }).catch((error)=>{
-        res.status(400).send(error);})
+    // Recipe.deleteMany ({}).then((data)=>{
+    //     Recipe.create(recipes).then((data)=>{
+    //         res.json(data);
+    //     })
+    // }).catch((error)=>{
+    //     res.status(400).send(error);})
 })
 
-
+//i n d u  c  e s
 //index 
+
 router.get ("/" , (req,res)=>{
     Recipe.find({}).then((foundRecipes)=>{
         res.render("recipes/Index.jsx" , {
@@ -99,6 +101,7 @@ router.get ("/" , (req,res)=>{
 })
 
 //new
+
 router.get("/new" ,(req,res)=> {
     res.render("recipes/New.jsx");
 })
@@ -128,6 +131,9 @@ router.get("/:id" , (req,res)=> {
     })
 })
 
+
+// edit 
+
 router.get("/:id/edit",(req,res)=>{
     Recipe.findById(req.params.id,(err,foundRecipe)=>{
         if(err){
@@ -151,6 +157,18 @@ router.put("/:id" ,(req,res)=>{
 
         }else{
             res.redirect(`/recipes/${updatedRecipe._id}`) ;
+        }
+    })
+})
+
+//delete route 
+router.delete("/:id" ,(req,res) => {
+    
+    Recipe.findByIdAndDelete(req.params.id , (err,deletedRecipe)=>{
+        if(err){
+            res.status(400).send(err);
+        } else {
+            res.redirect("/recipes");
         }
     })
 })

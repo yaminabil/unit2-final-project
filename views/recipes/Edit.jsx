@@ -8,6 +8,7 @@ class Edit extends React.Component {
         const {recipe} = this.props;
         return(
             <DefaultLayout title={`Edit ${recipe.name}`}>
+                <a href={`/recipes/${recipe._id}`}>Go back to show route</a>
              <form action={`/recipes/${recipe._id}?_method=PUT`} method="POST">
                   <ul id="ul-form">
 

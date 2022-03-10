@@ -12,6 +12,7 @@ class Show extends React.Component {
               <div id="show-div">
               
               <ul>
+                  <a href="/recipes">Go back to your food collection</a>
               <li>Date this dish was made is : {recipe.createdAt.toLocaleDateString()}</li> <br />
               <li>The meal : {recipe.meal}</li>  <br />
               <li>The tools was used : {recipe.tools} </li><br />
@@ -44,6 +45,16 @@ class Show extends React.Component {
                <br/>
 
                Click <a href={`/recipes/${recipe._id}/edit`}>here</a> if you want to edit !
+
+               
+               
+               
+               <form action={`/recipes/${recipe._id}?_method=DELETE`} method="POST">
+
+               Click <input  type="submit" value = "delete" /> if you want to delete !
+
+               </form>
+              
 
             </DefaultLayout>
             
