@@ -8,7 +8,10 @@ const recipeSchema = new Schema ({
     meal:String,
     tools:String,
     ingredients:String,
-    imageSrc:String
+    imageSrc:String,
+    cookMethod:String,
+    cookFault:String
+   
 },
 {
     timestamps:true

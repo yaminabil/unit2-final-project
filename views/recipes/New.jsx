@@ -9,8 +9,9 @@ class New extends React.Component {
             <DefaultLayout title="New Dish"> 
               
               <h2>create your new dish :</h2>
+              
               <form action="/recipes" method="POST">
-                  <ul>
+                  <ul id="ul-form">
 
                  <li>Name: <input className="name" type="text" name="name" /><br /></li> 
                  <li>Meal:
@@ -38,22 +39,39 @@ class New extends React.Component {
                   <li>Tools:<br />
                  <textarea type="text" name="tools"/> <br /></li> 
                  <li> Ingrediends : <br />
-                 <textarea  type="text" name="ingredients" /> <br /></li> 
+                 <textarea  type="text" name="ingredients" /> <br /></li> <br/>
 
                  <li>
                      
                      
-                     Insert Image url here : <input id="urlInput" name="imageSrc"/> 
+                     Insert Image url here :<br /> <input id="urlInput" name="imageSrc"/> 
                      
 
-                     </li>
+                     </li> <br/><br/><br/>
+
+
+                     
+
+                      <li>
+                          <h3> How did you cook it ? </h3>
+                      <textarea  name="cookMethod"/>
+                      </li>
+                      <li>
+                          <h3>  What went bad ? </h3>
+                      <textarea name="cookFault" />
+                      </li>
+                      
+                      
 
                  <li><input type="submit"/></li>
 
 
                 
                  </ul>
+                 
               </form>
+
+
               
 
             </DefaultLayout>

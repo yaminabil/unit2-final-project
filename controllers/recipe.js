@@ -14,38 +14,39 @@ router.get ("/seed" , (req,res)=>{
             tools:"oven",
             ingredients:"tomatoes",
             imageSrc:"https://www.simplyrecipes.com/thmb/8caxM88NgxZjz-T2aeRW3xjhzBg=/2000x1125/smart/filters:no_upscale()/__opt__aboutcom__coeus__resources__content_migration__simply_recipes__uploads__2019__09__easy-pepperoni-pizza-lead-3-8f256746d649404baa36a44d271329bc.jpg",
+            
              
         },//1
         {
-            name:"pizza",
+            name:"dolma",
             meal:"launch",
             tools:"oven",
             ingredients:"tomatoes",
-            imageSrc:"https://www.simplyrecipes.com/thmb/8caxM88NgxZjz-T2aeRW3xjhzBg=/2000x1125/smart/filters:no_upscale()/__opt__aboutcom__coeus__resources__content_migration__simply_recipes__uploads__2019__09__easy-pepperoni-pizza-lead-3-8f256746d649404baa36a44d271329bc.jpg",
+            imageSrc:"https://www.unicornsinthekitchen.com/wp-content/uploads/2019/08/Dolma-feature-image-500x500.jpg",
              
         },//2
         {
-            name:"pizza",
+            name:"cheese-cake",
             meal:"launch",
             tools:"oven",
             ingredients:"tomatoes",
-            imageSrc:"https://www.simplyrecipes.com/thmb/8caxM88NgxZjz-T2aeRW3xjhzBg=/2000x1125/smart/filters:no_upscale()/__opt__aboutcom__coeus__resources__content_migration__simply_recipes__uploads__2019__09__easy-pepperoni-pizza-lead-3-8f256746d649404baa36a44d271329bc.jpg",
+            imageSrc:"https://food.fnr.sndimg.com/content/dam/images/food/fullset/2013/12/9/0/FNK_Cheesecake_s4x3.jpg.rend.hgtvcom.616.462.suffix/1387411272847.jpeg",
              
         },//3
         {
-            name:"pizza",
+            name:"salad",
             meal:"launch",
             tools:"oven",
             ingredients:"tomatoes",
-            imageSrc:"https://www.simplyrecipes.com/thmb/8caxM88NgxZjz-T2aeRW3xjhzBg=/2000x1125/smart/filters:no_upscale()/__opt__aboutcom__coeus__resources__content_migration__simply_recipes__uploads__2019__09__easy-pepperoni-pizza-lead-3-8f256746d649404baa36a44d271329bc.jpg",
+            imageSrc:"https://cdn.loveandlemons.com/wp-content/uploads/2021/04/green-salad-500x375.jpg",
              
         },//4
         {
-            name:"pizza",
+            name:"omlets",
             meal:"launch",
             tools:"oven",
             ingredients:"tomatoes",
-            imageSrc:"https://www.simplyrecipes.com/thmb/8caxM88NgxZjz-T2aeRW3xjhzBg=/2000x1125/smart/filters:no_upscale()/__opt__aboutcom__coeus__resources__content_migration__simply_recipes__uploads__2019__09__easy-pepperoni-pizza-lead-3-8f256746d649404baa36a44d271329bc.jpg",
+            imageSrc:"https://img-global.cpcdn.com/recipes/ed6933b940de1203/1200x630cq70/photo.jpg",
              
         },//5
         {
@@ -119,10 +120,37 @@ router.get("/:id" , (req,res)=> {
     Recipe.findById(req.params.id, (err,foundRecipe)=>{
         if(err){
 
-        }else{
+        } else {
             res.render("recipes/Show.jsx",{
                 recipe :foundRecipe
             })
+        }
+    })
+})
+
+router.get("/:id/edit",(req,res)=>{
+    Recipe.findById(req.params.id,(err,foundRecipe)=>{
+        if(err){
+
+        } else {
+            res.render("recipes/Edit.jsx" ,{
+                recipe:foundRecipe
+
+            })
+        }
+
+    })
+    
+})
+
+//update route 
+
+router.put("/:id" ,(req,res)=>{
+    Recipe.findByIdAndUpdate(req.params.id,req.body, {new:true}, (err,updatedRecipe)=>{
+        if(err){
+
+        }else{
+            res.redirect(`/recipes/${updatedRecipe._id}`) ;
         }
     })
 })
