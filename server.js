@@ -5,8 +5,12 @@ const morgan =require("morgan");
 const methodOverride = require("method-override");
 const path = require("path");
 const recipesController = require("./controllers/recipe");
+const Recipe = require("./models/recipe");
 
 
+
+
+// 
 
 
 
@@ -34,8 +38,12 @@ app.use(express.urlencoded({extended:true}));
 app.use(express.static("public"));
 
 
+
 //Routes
-app.use("/recipes",recipesController);
+app.use(`/recipes`,recipesController);
+
+
+
 app.get ("/",(req,res) =>{
     res.send("your server is runing ..... you better catch it ");
 
@@ -45,7 +53,19 @@ app.get ("/",(req,res) =>{
 
 
 
-//server listener 
+
+
+
+
+
+
+
+
+
+
+
+
+// server listener 
 const PORT = process.env.PORT;
 app.listen(PORT , ()=> {
     console.log(`now listening on port ${PORT}`) ;

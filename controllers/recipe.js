@@ -1,98 +1,113 @@
 const express = require("express");
-const { route } = require("express/lib/application");
-const { render } = require("express/lib/response");
+const req = require("express/lib/request");
+const { redirect } = require("express/lib/response");
 const Recipe = require("../models/recipe");
+
+
 
 
 const router = express.Router();
 
 router.get ("/seed" , (req,res)=>{
 
-    const recipes = [
-        {
-            name:"pizza",
-            meal:"launch",
-            tools:"oven",
-            ingredients:"tomatoes",
-            imageSrc:"https://www.simplyrecipes.com/thmb/8caxM88NgxZjz-T2aeRW3xjhzBg=/2000x1125/smart/filters:no_upscale()/__opt__aboutcom__coeus__resources__content_migration__simply_recipes__uploads__2019__09__easy-pepperoni-pizza-lead-3-8f256746d649404baa36a44d271329bc.jpg",
+    // const recipes = [
+    //     {
+    //         name:"pizza",
+    //         meal:"launch",
+    //         tools:"oven",
+    //         ingredients:"tomatoes",
+    //         imageSrc:"https://www.simplyrecipes.com/thmb/8caxM88NgxZjz-T2aeRW3xjhzBg=/2000x1125/smart/filters:no_upscale()/__opt__aboutcom__coeus__resources__content_migration__simply_recipes__uploads__2019__09__easy-pepperoni-pizza-lead-3-8f256746d649404baa36a44d271329bc.jpg",
             
              
-        },//1
-        {
-            name:"dolma",
-            meal:"launch",
-            tools:"oven",
-            ingredients:"tomatoes",
-            imageSrc:"https://www.unicornsinthekitchen.com/wp-content/uploads/2019/08/Dolma-feature-image-500x500.jpg",
+    //     },//1
+    //     {
+    //         name:"dolma",
+    //         meal:"launch",
+    //         tools:"oven",
+    //         ingredients:"tomatoes",
+    //         imageSrc:"https://www.unicornsinthekitchen.com/wp-content/uploads/2019/08/Dolma-feature-image-500x500.jpg",
              
-        },//2
-        {
-            name:"cheese-cake",
-            meal:"launch",
-            tools:"oven",
-            ingredients:"tomatoes",
-            imageSrc:"https://food.fnr.sndimg.com/content/dam/images/food/fullset/2013/12/9/0/FNK_Cheesecake_s4x3.jpg.rend.hgtvcom.616.462.suffix/1387411272847.jpeg",
+    //     },//2
+    //     {
+    //         name:"cheese-cake",
+    //         meal:"launch",
+    //         tools:"oven",
+    //         ingredients:"tomatoes",
+    //         imageSrc:"https://food.fnr.sndimg.com/content/dam/images/food/fullset/2013/12/9/0/FNK_Cheesecake_s4x3.jpg.rend.hgtvcom.616.462.suffix/1387411272847.jpeg",
              
-        },//3
-        {
-            name:"salad",
-            meal:"launch",
-            tools:"oven",
-            ingredients:"tomatoes",
-            imageSrc:"https://cdn.loveandlemons.com/wp-content/uploads/2021/04/green-salad-500x375.jpg",
+    //     },//3
+    //     {
+    //         name:"salad",
+    //         meal:"launch",
+    //         tools:"oven",
+    //         ingredients:"tomatoes",
+    //         imageSrc:"https://cdn.loveandlemons.com/wp-content/uploads/2021/04/green-salad-500x375.jpg",
              
-        },//4
-        {
-            name:"omlets",
-            meal:"launch",
-            tools:"oven",
-            ingredients:"tomatoes",
-            imageSrc:"https://img-global.cpcdn.com/recipes/ed6933b940de1203/1200x630cq70/photo.jpg",
+    //     },//4
+    //     {
+    //         name:"omlets",
+    //         meal:"launch",
+    //         tools:"oven",
+    //         ingredients:"tomatoes",
+    //         imageSrc:"https://img-global.cpcdn.com/recipes/ed6933b940de1203/1200x630cq70/photo.jpg",
              
-        },//5
-        {
-            name:"pizza",
-            meal:"launch",
-            tools:"oven",
-            ingredients:"tomatoes",
-            imageSrc:"https://www.simplyrecipes.com/thmb/8caxM88NgxZjz-T2aeRW3xjhzBg=/2000x1125/smart/filters:no_upscale()/__opt__aboutcom__coeus__resources__content_migration__simply_recipes__uploads__2019__09__easy-pepperoni-pizza-lead-3-8f256746d649404baa36a44d271329bc.jpg",
+    //     },//5
+    //     {
+    //         name:"pizza",
+    //         meal:"launch",
+    //         tools:"oven",
+    //         ingredients:"tomatoes",
+    //         imageSrc:"https://www.simplyrecipes.com/thmb/8caxM88NgxZjz-T2aeRW3xjhzBg=/2000x1125/smart/filters:no_upscale()/__opt__aboutcom__coeus__resources__content_migration__simply_recipes__uploads__2019__09__easy-pepperoni-pizza-lead-3-8f256746d649404baa36a44d271329bc.jpg",
              
-        },//6
-        {
-            name:"pizza",
-            meal:"launch",
-            tools:"oven",
-            ingredients:"tomatoes",
-            imageSrc:"https://www.simplyrecipes.com/thmb/8caxM88NgxZjz-T2aeRW3xjhzBg=/2000x1125/smart/filters:no_upscale()/__opt__aboutcom__coeus__resources__content_migration__simply_recipes__uploads__2019__09__easy-pepperoni-pizza-lead-3-8f256746d649404baa36a44d271329bc.jpg",
+    //     },//6
+    //     {
+    //         name:"pizza",
+    //         meal:"launch",
+    //         tools:"oven",
+    //         ingredients:"tomatoes",
+    //         imageSrc:"https://www.simplyrecipes.com/thmb/8caxM88NgxZjz-T2aeRW3xjhzBg=/2000x1125/smart/filters:no_upscale()/__opt__aboutcom__coeus__resources__content_migration__simply_recipes__uploads__2019__09__easy-pepperoni-pizza-lead-3-8f256746d649404baa36a44d271329bc.jpg",
              
-        },//7
-        {
-            name:"pizza",
-            meal:"launch",
-            tools:"oven",
-            ingredients:"tomatoes",
-            imageSrc:"https://www.simplyrecipes.com/thmb/8caxM88NgxZjz-T2aeRW3xjhzBg=/2000x1125/smart/filters:no_upscale()/__opt__aboutcom__coeus__resources__content_migration__simply_recipes__uploads__2019__09__easy-pepperoni-pizza-lead-3-8f256746d649404baa36a44d271329bc.jpg",
+    //     },//7
+    //     {
+    //         name:"pizza",
+    //         meal:"launch",
+    //         tools:"oven",
+    //         ingredients:"tomatoes",
+    //         imageSrc:"https://www.simplyrecipes.com/thmb/8caxM88NgxZjz-T2aeRW3xjhzBg=/2000x1125/smart/filters:no_upscale()/__opt__aboutcom__coeus__resources__content_migration__simply_recipes__uploads__2019__09__easy-pepperoni-pizza-lead-3-8f256746d649404baa36a44d271329bc.jpg",
              
-        }//8
+    //     }//8
         
        
-    ]; 
+    // ]; 
 
-    // Recipe.deleteMany ({}).then((data)=>{
-    //     Recipe.create(recipes).then((data)=>{
-    //         res.json(data);
-    //     })
-    // }).catch((error)=>{
-    //     res.status(400).send(error);})
+    // Recipe.deleteMany({} , (err)=>{res.redirect("/recipes");})
+
+    Recipe.deleteMany({} )
+    .then((data)=>{
+        Recipe.create(recipes).then((data)=>{
+            res.json(data);
+        })
+    }).catch((error)=>{
+        res.status(400).send(error);})
 })
 
 //i n d u  c  e s
 //index 
 
-router.get ("/" , (req,res)=>{
-    Recipe.find({}).then((foundRecipes)=>{
+
+
+router.get("/" , (req,res)=>{
+
+ 
+    
+    console.log("big test ==============> "+ res.body);
+
+    Recipe.find({user:"622f760c5fc1f8a3e512ad9d"}).then((foundRecipes)=>{
+       
         res.render("recipes/Index.jsx" , {
-            recipes:foundRecipes
+            recipes:foundRecipes,
+            // info:req.params.id
+         
         })
 
     }).catch((error)=>{
@@ -103,12 +118,26 @@ router.get ("/" , (req,res)=>{
 //new
 
 router.get("/new" ,(req,res)=> {
-    res.render("recipes/New.jsx");
+    res.render("recipes/New.jsx",{userName:req.params.userName});
 })
 
 
 //create
 router.post("/",(req,res)=>{
+    // let ob2 = {
+        
+    //     name:req.body.name,
+    //     meal:req.body.meal,
+    //     tools:req.body.tools,
+    //     ingredients:req.body.ingredients,
+    //     imageSrc:req.body.imageSrc,
+    //     cookMethod:req.body.cookMethod,
+    //     cookFault:req.body.cookFault,
+    //     user:"public"
+    // }
+    req.body.user="622f760c5fc1f8a3e512ad9d"
+    
+    
     Recipe.create(req.body ,(err,createdRecipe)=>{
         if(err){
 
@@ -149,6 +178,8 @@ router.get("/:id/edit",(req,res)=>{
     
 })
 
+
+
 //update route 
 
 router.put("/:id" ,(req,res)=>{
@@ -163,7 +194,7 @@ router.put("/:id" ,(req,res)=>{
 
 //delete route 
 router.delete("/:id" ,(req,res) => {
-    
+
     Recipe.findByIdAndDelete(req.params.id , (err,deletedRecipe)=>{
         if(err){
             res.status(400).send(err);
@@ -174,4 +205,281 @@ router.delete("/:id" ,(req,res) => {
 })
 
 
+
+
+
+// user routes 
+////////////////////////////
+//user model///////////////
+///////////////////////////
+
+
+
+
+const User = require("../models/user");
+
+
+router.get("/user",(req,res)=>{
+    res.send("hello");
+})
+
+//login route 
+
+router.get("/user/login",(req,res)=>{
+    res.render("users/Login.jsx")
+})
+
+//new route 
+router.get("/user/new",(req,res)=>{
+    res.render("users/New.jsx");
+})
+//create route 
+
+router.post ("/user",(req,res)=>{
+    req.body.connected = false;
+    
+    User.create(req.body , (err,createdUser)=>{
+        if(err){
+
+        } else {
+            res.redirect("/recipes/user/login");
+        }
+    })
+})
+
+//login check 
+
+router.post("/user/check" ,(req,res)=>{
+    req.body.connected = false;
+    
+    User.findOne( {name:req.body.name } , (err,foundUser) =>{
+       
+        if (!foundUser) {
+            const message = {
+                message: 'user not found !'}
+            res.render("users/Login.jsx" , message);
+            console.log("nooooooooo");
+        } else if (foundUser && req.body.password !== foundUser.password) {
+            const message = {
+                message: 'incorrect password  !'}
+            res.render("users/Login.jsx" , message);
+            console.log("nooooooooo");
+        
+
+        } else {
+            foundUser.connected = true;
+            User.findByIdAndUpdate (foundUser._id ,foundUser, {new:true},(err,updatedUser) =>{
+
+                if(err) {
+
+                } else {
+
+                    res.redirect(`/recipes/user/${updatedUser._id}`);
+
+                    
+                
+                    
+                }
+
+            })
+            
+        }
+    })
+
+
+   
+})
+
+
+// index route 
+
+
+router.get("/user/:id" , async (req,res)=>{
+
+    let user = await User.findById (req.params.id) ;
+    
+
+
+    Recipe.find({user:req.params.id} , (err,foundRecipes) =>{ 
+        if(err){
+            res.send(err);
+        } else {
+            res.render("users/Index.jsx",{
+                user,
+                recipes:foundRecipes
+
+            })
+        }
+
+
+    })
+   
+       
+            
+})         
+            
+
+
+//new route for user new recipes 
+
+
+router.get( "/user/:id/newrecipe" , (req,res)=> {
+
+
+    User.findById(req.params.id , (err,foundUser) => {
+        if(err) {
+            res.send(err);
+
+        } else {
+            res.render ("users/NewRecipe.jsx" , {
+               user : foundUser
+            })
+
+        }
+    })
+  
+})
+
+//create route for  user recipes 
+
+router.post("/user/:id",(req,res)=>{
+    
+
+    Recipe.create(req.body ,(err,createdRecipe)=>{
+        if(err){
+
+        } else {
+
+            
+            User.findByIdAndUpdate(req.params.id , { $addToSet: { recipes: createdRecipe._id } },{new:true},(err,updatedUser) => {
+                if(err) {
+
+                } else {
+
+        
+                    res.redirect(`/recipes/user/${req.params.id}`);
+
+                }
+            })
+            
+            
+            let ob = {
+                id:createdRecipe._id,
+                name:createdRecipe.name,
+                meal:createdRecipe.meal,
+                tools:createdRecipe.tools,
+                ingredients:createdRecipe.ingredients,
+                imageSrc:createdRecipe.imageSrc,
+                cookMethod:createdRecipe.cookMethod,
+                cookFault:createdRecipe.cookFault,
+                user:req.params.id
+            }
+
+            Recipe.findByIdAndUpdate(createdRecipe._id , ob ,{new:true} ,(err , updatedRecipe)=>{
+                if(err){
+                    res.send(err)
+                }
+
+            })
+
+           
+            
+           
+        }
+    })
+})
+
+// create = method (post) , update =method (put) , delete = method (delete)
+
+
+//edit connection 
+
+router.get("/user/:id/logout" , async (req,res)=>{
+    let user = await User.findById(req.params.id);
+    res.render("users/Logout.jsx",{user} );
+   
+
+})
+
+/// log out  Update
+
+router.put ("/user/:id" , async (req,res)=>{
+
+  let user = await User.findById(req.params.id);
+     user.connected = false ;
+
+    
+    User.findByIdAndUpdate(req.params.id,user ,{new:true},(err,updatedUser)=>{
+        if(err){
+            res.send(err);
+        }else {
+            res.redirect("/recipes/user/login");
+        }
+    } )
+})
+
+
+
+
 module.exports=router;
+
+
+
+
+// User.findById (req.params.id , (err,foundUser)=> {
+//     if(err){
+//         res.send(err);
+//     }else{
+//        const arrData =[];
+
+
+
+      
+//        //////////////////start//////////////////////////////
+
+//        if(foundUser.recipes.length === 0){
+//            res.render('users/Index.jsx',{
+//                user:foundUser,
+//                arrOfData: arrData
+//            })
+
+//        }else{
+
+//        for(let i = 0 ; i < foundUser.recipes.length ; i++) {// start
+//            // console.log("hello there can you see me  ===============> " + recipe);
+//            Recipe.findById (foundUser.recipes[i] ).then((foundRecipe)=>{
+//              arrData.push(foundRecipe);
+
+            
+
+
+//              if (i===foundUser.recipes.length-1){ // do not render unless this conndition is satisfied  the reason why i did it this  because the render is faster than my loop collecting the data
+
+//                console.log(arrData.length);
+//                res.render('users/Index.jsx',{
+//                    user:foundUser,
+//                    arrOfData: arrData
+//                })
+               
+//              }
+             
+             
+               
+//            }).catch((error) => {  res.status(400).send(error);})
+//        }
+
+//    }
+
+      
+   
+          
+
+        
+
+
+//        ///////////////////end/////////////////////////////
+
+//     }
+// }); 
+
+

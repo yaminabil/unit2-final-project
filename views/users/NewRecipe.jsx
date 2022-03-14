@@ -1,18 +1,25 @@
 const React = require("react");
-const DefaultLayout =require("../Default")
+const UserLayout = require("../UserLayout");
 
 
 
 class New extends React.Component {
     render() {
-        const userName = this.props.userName;
-        return (
-            <DefaultLayout title="New Dish"> 
-              
-              <h2>create your new dish :</h2>
 
-              <form action={`/recipes`} method="POST">
-                  <ul id="ul-form">
+        const {user} = this.props; 
+        return (
+            <UserLayout title={`New Dish for ${user.name}`} 
+            subTitle = "create your new dish :" 
+            myStyle={{ color:`${user.fav}` }}
+            imageSrc= {user.image} 
+            icon={"https://t4.ftcdn.net/jpg/04/52/97/77/360_F_452977789_d2lgKqXb3ZeXGxw25uNg82ObxzVGyRt6.jpg"} 
+            urlTo= {`/recipes/user/${user._id}/logout`} 
+            > 
+              
+              
+
+              <form action={`/recipes/user/${user._id}`} method="POST">
+                  <ul id="ul-form"  style={{ color :`${user.fav}`}}>
 
                  <li>Name: <input className="name" type="text" name="name" /><br /></li> 
                  <li>Meal:
@@ -64,7 +71,7 @@ class New extends React.Component {
                       
                       
 
-                 <li><input type="submit"/></li>
+                 <li ><input type="submit" value="Submit" style={{ color:`${user.fav}`}}/></li>
 
 
                 
@@ -75,7 +82,7 @@ class New extends React.Component {
 
               
 
-            </DefaultLayout>
+            </UserLayout>
         )
     }
 }

@@ -90,8 +90,9 @@ a{
    
 }
 .plus:hover {
-    height: 10rem;
-    width: 10rem;
+    position: relative;
+    right: 20px;
+    bottom: 20px;
     
     
 
@@ -161,5 +162,31 @@ li{
     
 
   }
+
+  .log-icon {
+      height: 40px;
+      margin-right: 20px;
+  }
+.log-icon:hover{
+   position: relative;
+   right: 30px;
+  
+}
+
+  .profile-picture{
+      border-radius: 30px;
+      height: 50px;
+      width: 70px;
+      background-size: cover;
+      
+  }
+  .profile-picture:hover  {
+    position: relative;
+    left: 30px;
+  }
+  
+
+
+
 
  

@@ -10,7 +10,10 @@ const recipeSchema = new Schema ({
     ingredients:String,
     imageSrc:String,
     cookMethod:String,
-    cookFault:String
+    cookFault:String,
+    user:{type:Schema.Types.ObjectId , ref: "User"}
+  
+    
    
 },
 {

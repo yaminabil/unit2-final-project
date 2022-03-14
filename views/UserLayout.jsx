@@ -1,5 +1,4 @@
 const React = require ("react");
-const Login = require("./users/login");
 
 
 
@@ -8,7 +7,9 @@ const Login = require("./users/login");
 
 
 
-class DefaultLayout extends React.Component {
+
+
+class UserLayout extends React.Component {
 
     render(){
         return (
@@ -61,24 +62,47 @@ class DefaultLayout extends React.Component {
 
                 <body>
                     <header>
-                        <h1 className="title"> 
+                        <h1 className="title" style={this.props.myStyle} > 
 
-                        <div className="titleLogo"><img id="logo" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTsLGgcPEcNqr86AEUMHMNImlJ7kpZunomhygtQp-lW2hBJOxrRarlb_ZYToB-hAqINqmc&usqp=CAU"/></div> 
+                        <div className="titleLogo"> <img id="logo" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTsLGgcPEcNqr86AEUMHMNImlJ7kpZunomhygtQp-lW2hBJOxrRarlb_ZYToB-hAqINqmc&usqp=CAU"/>
+                        </div> 
+
                         <div className="titleText">{this.props.title}</div> 
+
                         <div>
+                       
                         <a href={this.props.urlTo}> 
                         <img className="log-icon" 
-                        src={this.props.icon}>
+                        src={this.props.icon} title="log out" >
                         </img>
                         </a>
-                           
+                         
+                       
+                       
+                        <a href={this.props.urlProfile} >
+                            <img  
+                            className="profile-picture" 
+                            src={this.props.imageSrc}  
+                            title="profile" />
+                        </a>
+                        
+                        
+                        
+                       
+                       
+                       
+                        
+                       
                         </div>
+                       
+                        
+                        
+                       
 
                         </h1>
-                        
                     </header>
-                    <main>
-                        <h2>{this.props.subTitle}</h2>
+                    <main  >
+                    <h2 style={this.props.myStyle} > {this.props.subTitle} </h2>
                     {this.props.children}
                      
                                  
@@ -87,7 +111,7 @@ class DefaultLayout extends React.Component {
 
 
                     <footer>
-                       <h1>Have fun</h1>
+                       <h1 style={this.props.myStyle} >Have fun</h1>
 
                       
 
@@ -104,5 +128,8 @@ class DefaultLayout extends React.Component {
 
 }
 
-module.exports = DefaultLayout;
+module.exports = UserLayout;
+
+
+// src="https://media.istockphoto.com/vectors/chef-avatar-flat-icon-flat-vector-illustration-symbol-design-element-vector-id1208588953?k=20&m=1208588953&s=170667a&w=0&h=p-l_yUL13OYpAM63ibGFENLcSxEzYiOCTwLL_sHfoW4="
 
