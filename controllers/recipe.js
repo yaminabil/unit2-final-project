@@ -1,6 +1,5 @@
 const express = require("express");
-const req = require("express/lib/request");
-const { redirect } = require("express/lib/response");
+const { route } = require("express/lib/router");
 const Recipe = require("../models/recipe");
 
 
@@ -92,6 +91,8 @@ router.get ("/seed" , (req,res)=>{
 })
 
 //i n d u  c  e s
+
+
 //index 
 
 
@@ -115,11 +116,24 @@ router.get("/" , (req,res)=>{
     })
 })
 
+
+
 //new
 
 router.get("/new" ,(req,res)=> {
-    res.render("recipes/New.jsx",{userName:req.params.userName});
+
+    Recipe.find({user:"622f760c5fc1f8a3e512ad9d"}).then((foundRecipes)=>{
+       
+        res.render("recipes/New.jsx" , {
+            recipes:foundRecipes
+        });
+
+    }).catch((error)=>{
+        res.status(400).send(error);
+    })
 })
+
+    
 
 
 //create
@@ -148,13 +162,17 @@ router.post("/",(req,res)=>{
 })
 
 //show 
-router.get("/:id" , (req,res)=> {
+router.get("/:id" , async (req,res)=> {
+
+   const recipes = await  Recipe.find ({user:"622f760c5fc1f8a3e512ad9d"});
+    
     Recipe.findById(req.params.id, (err,foundRecipe)=>{
         if(err){
 
         } else {
             res.render("recipes/Show.jsx",{
-                recipe :foundRecipe
+                recipe :foundRecipe,
+                recipes
             })
         }
     })
@@ -163,13 +181,17 @@ router.get("/:id" , (req,res)=> {
 
 // edit 
 
-router.get("/:id/edit",(req,res)=>{
+router.get("/:id/edit",async (req,res)=>{
+
+    const recipes = await  Recipe.find ({user:"622f760c5fc1f8a3e512ad9d"});
+
     Recipe.findById(req.params.id,(err,foundRecipe)=>{
         if(err){
 
         } else {
             res.render("recipes/Edit.jsx" ,{
-                recipe:foundRecipe
+                recipe:foundRecipe,
+                recipes
 
             })
         }
@@ -225,13 +247,20 @@ router.get("/user",(req,res)=>{
 
 //login route 
 
-router.get("/user/login",(req,res)=>{
-    res.render("users/Login.jsx")
+router.get("/user/login",async(req,res)=>{
+    const recipes = await  Recipe.find ({user:"622f760c5fc1f8a3e512ad9d"});
+    res.render("users/Login.jsx" , {
+        recipes
+    })
 })
 
 //new route 
-router.get("/user/new",(req,res)=>{
-    res.render("users/New.jsx");
+router.get("/user/new",async (req,res)=>{
+    const recipes = await  Recipe.find ({user:"622f760c5fc1f8a3e512ad9d"});
+    res.render("users/New.jsx" , {
+        recipes
+
+    });
 })
 //create route 
 
@@ -418,10 +447,87 @@ router.put ("/user/:id" , async (req,res)=>{
     } )
 })
 
+// show route for user profile 
+
+router.get ("/user/:id/profile" , (req,res) =>{
+    User.findById (req.params.id).then((foundUser)=>{
+        res.render("users/Profile.jsx",{user:foundUser} );
+    }).catch((err)=>{
+        res.send(err);
+    })
+    
+})
+
+//show route for recipe for user 
+
+
+router.get("/user/recipe/:id"  , async (req,res)=> {
+    
+
+
+   
+
+    Recipe.findById (req.params.id , (err,foundRecipe) =>{
+        if(err) {
+            res.send(err);
+        } else { 
+              User.findById (foundRecipe.user, (err,foundUser)=>{
+                  if (err) {
+                      res.send(err);
+
+                  } else {
+                    res.render ("userRecipes/Show.jsx" , {
+                        recipe  :foundRecipe,
+                        user : foundUser
+                    })
+                  }
+
+            }) ;
+            
+          
+        }
+        
+    })
+
+     
+  
+
+
+   
+})
+
+
+//delete route for user's recipe 
+
+
+router.delete("/user/recipe/:id" , (req,res) => {
+
+    Recipe.findById (req.params.id , (err,foundRecipe) => {
+     if(err) {
+         res.send(err);
+     }else { 
+         User.findById (foundRecipe.user , (err, foundUser) => {
+             if(err) {
+                 res.send(err); 
+             }else { 
+                 Recipe.deleteOne(foundRecipe).then(()=> {
+                     res.redirect(`/recipes/user/${foundUser._id}`) ;
+                 })
+             }
+         })
+     }
+    })
+})
+
 
 
 
 module.exports=router;
+
+
+
+/// function 
+
 
 
 

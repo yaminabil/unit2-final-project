@@ -1,20 +1,27 @@
-const React = require("react");
-const DefaultLayout =require("../Default")
+const React = require ("react");
+const UserLayout = require("../UserLayout");
+
+
 
 
 class Show extends React.Component {
-    render(){
-        const recipe = this.props.recipe ;
-        const recipes = this.props.recipes;
-        return(
-            
-            <DefaultLayout 
-            title ={`${recipe.name}`}  
-            urlBack="/recipes" 
-            number={recipes.length}
-            >
+    render () {
+        const {recipe} = this.props;
+        const {user} = this.props; 
+        return (
+        <UserLayout 
+        title = {`${recipe.name}`} 
+        urlTo = {`/recipes/user/${recipe.user}/logout`}
+        icon ={"https://t4.ftcdn.net/jpg/04/52/97/77/360_F_452977789_d2lgKqXb3ZeXGxw25uNg82ObxzVGyRt6.jpg"} 
+        subTitle={"Your Previous Dishes :"} 
+        myStyle={user.fav} 
+        imageSrc= {user.image} 
+        urlBack = {`/recipes/user/${recipe.user}`}
+       
+        >
 
-              <div id="show-div">
+
+<div id="show-div" style={{ color :`${user.fav}`}} >
               
               <ul>
                  
@@ -49,26 +56,20 @@ class Show extends React.Component {
                </div>
                <br/>
 
-               Click <a href={`/recipes/${recipe._id}/edit`}>here</a> if you want to edit !
+             <p   style={{ color :`${user.fav}`}} > Click <a href={`/recipes/${recipe._id}/edit`}>here</a> if you want to edit ! </p>
 
                
                
                
-               <form action={`/recipes/${recipe._id}?_method=DELETE`} method="POST">
+               <form action={`/recipes/user/recipe/${recipe._id}?_method=DELETE`} method="POST">
 
-               Click <input  type="submit" value = "delete" /> if you want to delete !
+              <p  style={{ color :`${user.fav}`}} >  Click <input  type="submit" value = "delete" /> if you want to delete ! </p>
 
                </form>
               
 
-            </DefaultLayout>
-            
-
-        )
+        </UserLayout>)
     }
 }
 
-
-module.exports = Show;
-
-<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Error, illo! Quibusdam voluptate ut veniam quos nostrum sint eveniet at ex! Laboriosam ipsam laborum, sit nihil minima error omnis? Fugiat, qui?</p>
+module.exports = Show ;

@@ -8,10 +8,14 @@ class Login extends React.Component {
     render(){
         // let divMessage = React.createElement("h1",{className:"div-message"});
         const message =this.props ;
+        const recipes = this.props.recipes;
         console.log(message);
         return (
-            <DefaultLayout title="Login">
-                <h1> If You don't have an account create <a href="/recipes/user/new"> here</a></h1>
+            <DefaultLayout
+             title="Login" 
+             urlBack="/recipes" 
+             number={recipes.length}>
+               
 
              <form action="/recipes/user/check" method="POST">
                  <ul>
@@ -26,7 +30,7 @@ class Login extends React.Component {
                  </ul>
              </form>
 
-             <a href="/recipes">  go back to the main page </a>
+             <h1> If You don't have an account create <a href="/recipes/user/new"> here</a></h1>
              
                  
              

@@ -25,7 +25,11 @@ class Index extends React.Component {
              urlTo={`/recipes/user/${user._id}/logout`} 
              icon ={"https://t4.ftcdn.net/jpg/04/52/97/77/360_F_452977789_d2lgKqXb3ZeXGxw25uNg82ObxzVGyRt6.jpg"} 
              subTitle={"Your Previous Dishes :"} 
-             myStyle={{ color:`${user.fav}` }} 
+             urlProfile={`/recipes/user/${user._id}/profile`}
+             urlBack = {`/recipes/user/${user._id}/logout`}
+             myStyle={user.fav}
+            imageSrc= {user.image} 
+             
             
             
              >
@@ -47,7 +51,7 @@ class Index extends React.Component {
                              Element.map((data)=>(
                                  
                                  
-                                 <a className="col"  href={`/recipes/${data._id}`} 
+                                 <a className="col"  href={`/recipes/user/recipe/${data._id}`} 
                                  style={{
                                     backgroundImage:`url( "${data.imageSrc}")` ,
                                     backgroundSize:"cover"
@@ -96,9 +100,11 @@ class Index extends React.Component {
                 urlTo= {`/recipes/user/${user._id}/logout`} 
                 icon={"https://t4.ftcdn.net/jpg/04/52/97/77/360_F_452977789_d2lgKqXb3ZeXGxw25uNg82ObxzVGyRt6.jpg"} 
                 subTitle={"Your Previous Dishes :"} 
-                myStyle={{ color:`${user.fav}` }}
+                myStyle={user.fav}
                 imageSrc= {user.image} 
-                urlProfile={`/recipes/user/${user._id}/newrecipe`}>
+                urlProfile={`/recipes/user/${user._id}/profile`}
+                urlBack = {`/recipes/user/${user._id}/logout`}
+                >
         
                  {/* <h2 style={{backgroundColor:"blueviolet"}}> Your Previous Dishes  :</h2> */}
 
@@ -112,7 +118,7 @@ class Index extends React.Component {
                      {
                      arrData.map((Element)=>
                          (
-                         <a className="col" href={`/recipes/${Element._id}`} style ={{
+                         <a className="col" href={`/recipes/user/recipe/${Element._id}`} style ={{
                             backgroundImage:`url( "${Element.imageSrc}")` ,
                             backgroundSize:"cover"
                          }}>

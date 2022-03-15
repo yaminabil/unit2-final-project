@@ -1,5 +1,9 @@
 const React = require ("react");
+const Recipe = require("../models/recipe");
 const Login = require("./users/login");
+
+
+
 
 
 
@@ -11,6 +15,7 @@ const Login = require("./users/login");
 class DefaultLayout extends React.Component {
 
     render(){
+        
         return (
             <html lang="en">
                 <head>
@@ -62,12 +67,14 @@ class DefaultLayout extends React.Component {
                 <body>
                     <header>
                         <h1 className="title"> 
+                        <a href={this.props.urlBack}> <img className="back-back"  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQHXZLoQucVboBLCvYOTC_cfNIx8jC9BmuUA&usqp=CAU"/> </a> 
 
                         <div className="titleLogo"><img id="logo" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTsLGgcPEcNqr86AEUMHMNImlJ7kpZunomhygtQp-lW2hBJOxrRarlb_ZYToB-hAqINqmc&usqp=CAU"/></div> 
                         <div className="titleText">{this.props.title}</div> 
                         <div>
+                            
                         <a href={this.props.urlTo}> 
-                        <img className="log-icon" 
+                        <img className="log-icon1" 
                         src={this.props.icon}>
                         </img>
                         </a>
@@ -78,7 +85,7 @@ class DefaultLayout extends React.Component {
                         
                     </header>
                     <main>
-                        <h2>{this.props.subTitle}</h2>
+                      
                     {this.props.children}
                      
                                  
@@ -87,7 +94,11 @@ class DefaultLayout extends React.Component {
 
 
                     <footer>
-                       <h1>Have fun</h1>
+                        
+                       <h3 >
+                       there are <span style={{color :"green"}}> {this.props.number}</span> plates
+                       
+                       </h3>
 
                       
 

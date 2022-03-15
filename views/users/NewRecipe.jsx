@@ -10,10 +10,12 @@ class New extends React.Component {
         return (
             <UserLayout title={`New Dish for ${user.name}`} 
             subTitle = "create your new dish :" 
-            myStyle={{ color:`${user.fav}` }}
+            myStyle={user.fav}
             imageSrc= {user.image} 
             icon={"https://t4.ftcdn.net/jpg/04/52/97/77/360_F_452977789_d2lgKqXb3ZeXGxw25uNg82ObxzVGyRt6.jpg"} 
             urlTo= {`/recipes/user/${user._id}/logout`} 
+            urlProfile={`/recipes/user/${user._id}/profile`}
+            urlBack = {`/recipes/user/${user._id}`}
             > 
               
               
@@ -46,7 +48,7 @@ class New extends React.Component {
                   </li> 
                   <li>Tools:<br />
                  <textarea type="text" name="tools"/> <br /></li> 
-                 <li> Ingrediends : <br />
+                 <li> Ingredients : <br />
                  <textarea  type="text" name="ingredients" /> <br /></li> <br/>
 
                  <li>

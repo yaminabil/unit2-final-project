@@ -62,14 +62,16 @@ class UserLayout extends React.Component {
 
                 <body>
                     <header>
-                        <h1 className="title" style={this.props.myStyle} > 
+                    
+                        <h1 className="title" style= {{color : `${this.props.myStyle}` }} > 
+                        <a href={this.props.urlBack}> <img className="log-icon"  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQHXZLoQucVboBLCvYOTC_cfNIx8jC9BmuUA&usqp=CAU"/> </a> 
 
                         <div className="titleLogo"> <img id="logo" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTsLGgcPEcNqr86AEUMHMNImlJ7kpZunomhygtQp-lW2hBJOxrRarlb_ZYToB-hAqINqmc&usqp=CAU"/>
                         </div> 
 
                         <div className="titleText">{this.props.title}</div> 
 
-                        <div>
+                        <div style={{ display:"flex" , flexDirection:"row"}}>
                        
                         <a href={this.props.urlTo}> 
                         <img className="log-icon" 
@@ -79,10 +81,10 @@ class UserLayout extends React.Component {
                          
                        
                        
-                        <a href={this.props.urlProfile} >
-                            <img  
+                        <a href= {this.props.urlProfile} >
+                            <div  
                             className="profile-picture" 
-                            src={this.props.imageSrc}  
+                            style={{ backgroundImage :`url("${this.props.imageSrc}")` ,border :`solid ${this.props.myStyle}`   }}  
                             title="profile" />
                         </a>
                         
@@ -94,6 +96,7 @@ class UserLayout extends React.Component {
                         
                        
                         </div>
+                         
                        
                         
                         
@@ -102,7 +105,7 @@ class UserLayout extends React.Component {
                         </h1>
                     </header>
                     <main  >
-                    <h2 style={this.props.myStyle} > {this.props.subTitle} </h2>
+                    <h2 style= {{color: `${this.props.myStyle}`}}  > {this.props.subTitle} </h2>
                     {this.props.children}
                      
                                  
@@ -111,7 +114,7 @@ class UserLayout extends React.Component {
 
 
                     <footer>
-                       <h1 style={this.props.myStyle} >Have fun</h1>
+                       <h1 style={{ color:`${this.props.myStyle}` }} >Have fun</h1>
 
                       
 

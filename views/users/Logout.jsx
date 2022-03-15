@@ -9,11 +9,13 @@ class Logout extends React.Component {
         return(       
         <UserLayout 
         title = {"are you sure you want to log out ?"} 
-        myStyle={{ color:`${user.fav}`}} 
+        myStyle={user.fav} 
         icon ={"https://t4.ftcdn.net/jpg/04/52/97/77/360_F_452977789_d2lgKqXb3ZeXGxw25uNg82ObxzVGyRt6.jpg"}
         urlTo= {`/recipes/user/${user._id}/logout`}  
         imageSrc= {user.image} 
         urlProfile={`/recipes/user/${user._id}/newrecipe`}
+        
+        urlBack = {`/recipes/user/${user._id}`}
         >
          
          <form action={`/recipes/user/${user._id}?_method=PUT`} method="POST" >

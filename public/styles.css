@@ -1,7 +1,7 @@
 body {
     
     /* border: solid purple; */
-    height: 70vw;
+    height: 90vw;
     font-family: 'Roboto Mono', monospace;
 }
 
@@ -173,9 +173,9 @@ li{
   
 }
 
-  .profile-picture{
-      border-radius: 30px;
-      height: 50px;
+  .profile-picture {
+    border-radius: 50%;
+      height: 70px;
       width: 70px;
       background-size: cover;
       
@@ -185,7 +185,52 @@ li{
     left: 30px;
   }
   
+  .div-photo {
+      margin-top: 2rem;
+      width: 30vw;
+      height: 30vw;
+      background-size: cover;
+      border-radius:  80%;
+     
+  }
 
+.profile-photo {
+    height: 25%;
+    width: 100%;
+    border-radius: 50%;
+
+}
+
+
+
+.log-icon1{
+    height: 40px;
+    margin-right: 20px;
+
+}
+.log-icon1:hover{
+    position: relative;
+    left: 30px;
+
+}
+
+.back-back 
+    {
+        height: 40px;
+        margin-right: 20px;
+    }
+
+.back-back:hover {
+    position: relative;
+    right: 30px;
+
+}
+
+h3 {
+    margin-top: 40px;
+    margin-left: 20px;
+    
+}
 
 
 

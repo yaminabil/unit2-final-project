@@ -6,10 +6,15 @@ const DefaultLayout = require("../Default");
 class Edit extends React.Component {
     render(){
         const {recipe} = this.props;
+        const {recipes} = this.props;
         return(
-            <DefaultLayout title={`Edit ${recipe.name}`}>
-                <a href={`/recipes/${recipe._id}`}>Go back to show route</a>
+            <DefaultLayout 
+            title={`Edit ${recipe.name}`} 
+            urlBack={`/recipes/${recipe._id}`}
+            number={recipes.length}
+            >
                 
+
              <form action={`/recipes/${recipe._id}?_method=PUT`} method="POST">
                   <ul id="ul-form">
 
@@ -50,7 +55,7 @@ class Edit extends React.Component {
                   </li> 
                   <li>Tools:<br />
                  <textarea type="text" name="tools" value={recipe.tools}/> <br /></li> 
-                 <li> Ingrediends : <br />
+                 <li> Ingredients : <br />
                  <textarea  type="text" name="ingredients" value={recipe.ingredients}/> <br /></li> <br/>
 
                  <li>

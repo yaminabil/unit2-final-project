@@ -32,9 +32,15 @@ class Index extends React.Component {
         if(arrOfData.length > 3) {
 
             return (
-                <DefaultLayout title = {`Welcome To MyCookBook`} urlTo={"/recipes/user/login"}  icon= {"https://iconape.com/wp-content/files/jf/369922/png/369922.png" }>
+                <DefaultLayout 
+                title = {`Welcome To MyCookBook`} 
+                urlTo={"/recipes/user/login"}  
+                icon= {"https://iconape.com/wp-content/files/jf/369922/png/369922.png"} 
+                urlBack="/recipes"
+                number={recipes.length}
+                >
         
-                 <h2>Previous Dishes for :</h2>
+                 <h2>Shared Plates :</h2>
                  <div className="total"> 
                  <a href={`/recipes/new`}> <div className="plus"></div> </a>  
     
@@ -93,9 +99,13 @@ class Index extends React.Component {
             )
         } else  {
                 return (
-                    <DefaultLayout title = {`Welcome To MyCookBook `}>
+                    <DefaultLayout
+                     title = {`Welcome To MyCookBook `}
+                     urlTo={"/recipes/user/login"}  
+                      icon= {"https://iconape.com/wp-content/files/jf/369922/png/369922.png" } 
+                      >
             
-                     <h2>Previous Dishes for :</h2>
+                     <h2>Shared Plates :</h2>
                      <div className="total">
                      <a href={`/recipes/new`}> <div className="plus"></div> </a>  
                      <div className="container"> 

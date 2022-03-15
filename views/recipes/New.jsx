@@ -5,11 +5,16 @@ const DefaultLayout =require("../Default")
 
 class New extends React.Component {
     render() {
-        const userName = this.props.userName;
+        const recipes = this.props.recipes;
         return (
-            <DefaultLayout title="New Dish"> 
+            <DefaultLayout 
+            title="New Dish" 
+            urlBack="/recipes"
+            number={recipes.length}
+
+            > 
               
-              <h2>create your new dish :</h2>
+              <h2>Create Your Plate :</h2>
 
               <form action={`/recipes`} method="POST">
                   <ul id="ul-form">
@@ -39,7 +44,7 @@ class New extends React.Component {
                   </li> 
                   <li>Tools:<br />
                  <textarea type="text" name="tools"/> <br /></li> 
-                 <li> Ingrediends : <br />
+                 <li> Ingredients : <br />
                  <textarea  type="text" name="ingredients" /> <br /></li> <br/>
 
                  <li>
