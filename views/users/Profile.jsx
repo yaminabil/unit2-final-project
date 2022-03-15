@@ -1,3 +1,4 @@
+const { text } = require("express");
 const { use } = require("express/lib/application");
 const React = require ("react");
 const UserLayout =require ("../UserLayout");
@@ -8,13 +9,16 @@ const UserLayout =require ("../UserLayout");
 class Profile extends React.Component {
     render(){
         const user = this.props.user;
-        let noPicture = "https://images.squarespace-cdn.com/content/v1/51239e9ae4b0dce195cba126/1556466683303-K5V354MR8E4W0YOOT21G/Question-mark-face.jpg"
+        const users=this.props.users;
+        
+
+       
         return(
         <UserLayout 
         title = {`Profile`}
         urlTo= {`/recipes/user/${user._id}/logout`} 
         icon={"https://t4.ftcdn.net/jpg/04/52/97/77/360_F_452977789_d2lgKqXb3ZeXGxw25uNg82ObxzVGyRt6.jpg"} 
-        subTitle={`${user.name}`} 
+        
         myStyle={user.fav}
         imageSrc= {user.image} 
         urlProfile={`/recipes/user/${user._id}/profile`}
@@ -24,6 +28,80 @@ class Profile extends React.Component {
            <div className="div-photo" style={{ backgroundImage :`url("${user.image}")`,border: `solid ${user.fav}`  }}>
              
             </div>
+
+            <form action={`/recipes/user/${user._id}/profile?_method=DELETE`} method="POST">
+
+              <h4 style={{color :`${user.fav}`}} >  Click <input style={{color :`${user.fav}`}} type="submit" value = "delete" /> if you want to delete your profile ! </h4>
+
+               </form>
+
+        
+            <div className="hr" ></div>
+            
+            <div className="profile-info" style={{color :`${user.fav}`}} >
+            
+                <div className="div-one" style={{border :`1px solid ${user.fav}` , width:"40%" , alignItems:"center"} } > 
+                <h1 style={{ textAlign : "center"}}>Info</h1>
+                 <form  action={`/recipes/user/${user._id}/profile?_method=PUT`}  method="POST" >
+                 <ul >
+                    <li>  UserName    : <input  name="name" value={user.name}/> </li><br />
+                    <li> Password : <input  name="password" value={user.password}  type="password"/> </li><br />
+                    <li> your favorite color :<input name="fav" value={user.fav} /> </li> <br />
+                    <li>Your photo URL :<input name="image" value={user.image}/> </li>
+                    <li>  <input type="submit" value="Edit"/> </li> 
+                </ul>
+
+                
+                </form>
+               
+
+                
+              
+                 
+                 </div>
+                 <div className="div-message"  style={{border :`1px solid ${user.fav}` , width:"40%" , alignItems:"center"} }> <h1 style={{ textAlign : "center"}}>Messages</h1></div>
+                <div className="div-two">
+
+                   <div className="connected-users">
+
+                   {
+                       users.map((user)=>{
+                           if(user.connected === true) {
+                           return (
+                               
+                            <a href= "" >
+                            <div  
+                            className="profile-picture2" 
+                            style={{ backgroundImage :`url("${user.image}")` ,border :`solid ${user.fav}` ,margin:"5px"  }}  
+                            title="profile" />
+                        </a>
+                           )}
+                       }) 
+                   }
+                   </div>
+                   <div className="disconnected-users">
+                       {
+                   users.map((user)=>{
+                       if(user.connected === false) {
+                           return (
+                            <a href= ""onClick={ function first  (user)  {return(user.name) }  >
+                            <div  
+                            className="profile-picture2" 
+                            style={{ backgroundImage :`url("${user.image}")` , border :`solid grey ` ,margin:"5px"  }}  
+                            title="profile" />
+                        </a>
+                           )
+                       }
+                       })
+                    }
+                   </div>
+                </div>
+
+                
+                
+             </div>
+            
+
 
         </UserLayout>
            

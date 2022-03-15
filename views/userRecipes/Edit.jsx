@@ -1,22 +1,27 @@
 const React = require("react");
-const DefaultLayout = require("../Default");
+const UserLayout = require("../UserLayout");
 
 
 
 class Edit extends React.Component {
     render(){
         const {recipe} = this.props;
-        const {recipes} = this.props;
+        const {user} = this.props;
+       
         return(
-            <DefaultLayout 
-            title={`Edit ${recipe.name}`} 
-            urlBack={`/recipes/${recipe._id}`}
-            number={recipes.length}
+            <UserLayout 
+            title = {`Edit ${recipe.name}`} 
+        urlTo = {`/recipes/user/${recipe.user}/logout`}
+        icon ={"https://t4.ftcdn.net/jpg/04/52/97/77/360_F_452977789_d2lgKqXb3ZeXGxw25uNg82ObxzVGyRt6.jpg"} 
+        myStyle= {user.fav} 
+        imageSrc= {user.image} 
+        urlBack = {`/recipes/user/${recipe.user}`}
+            
             >
                 
 
-             <form action={`/recipes/${recipe._id}?_method=PUT`} method="POST">
-                  <ul className ="ul-form">
+             <form action={`/recipes/user/recipe/${recipe._id}?_method=PUT`} method="POST"   >
+                  <ul id="ul-form" style={{ color : `${user.fav}`}}>
 
                  <li>Name: <input className="name" type="text" name="name" value={recipe.name} /><br /></li> 
                  <li>Meal: 
@@ -80,7 +85,7 @@ class Edit extends React.Component {
                       
                       
 
-                 <li><input type="submit"/></li>
+                 <li><input style={{ color : `${user.fav}`}} type="submit"/></li>
 
 
                 
@@ -88,7 +93,7 @@ class Edit extends React.Component {
                  
               </form>
 
-            </DefaultLayout>
+            </UserLayout>
 
         )
     }

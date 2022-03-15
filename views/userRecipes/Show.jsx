@@ -56,7 +56,7 @@ class Show extends React.Component {
                </div>
                <br/>
 
-             <p   style={{ color :`${user.fav}`}} > Click <a href={`/recipes/${recipe._id}/edit`}>here</a> if you want to edit ! </p>
+             <p   style={{ color :`${user.fav}`}} > Click <a href={`/recipes/user/recipe/${recipe._id}/edit`}>here</a> if you want to edit ! </p>
 
                
                

@@ -1,7 +1,7 @@
 body {
     
     /* border: solid purple; */
-    height: 90vw;
+    height: 120vw;
     font-family: 'Roboto Mono', monospace;
 }
 
@@ -63,7 +63,8 @@ body {
     /* border: solid red; */
 }
 
-main {
+main { 
+    /* height: 60%; */
     background-color: aliceblue;
     padding: 20px;
  
@@ -152,10 +153,11 @@ li{
       justify-content: space-evenly;
   }
 
-  #ul-form{
+  .ul-form{
     border: 1px solid black;
     width: fit-content;
     box-shadow: 12px 12px 2px 1px rgba(191, 191, 196, 0.2);
+    margin: 0 auto;
     
     
     /* background-color: rgb(208, 210, 212); */
@@ -186,7 +188,9 @@ li{
   }
   
   .div-photo {
-      margin-top: 2rem;
+      
+      margin: 2rem auto;
+      
       width: 30vw;
       height: 30vw;
       background-size: cover;
@@ -234,4 +238,81 @@ h3 {
 
 
 
+/* profile window ***********************************************/
+
+ .profile-info {
+     /* border: solid red; */
+     height: 40vw;
+     display: flex;
+     flex-direction: row;
+     justify-content: space-between;
+
+ }
+
+ .div-one {
+     /* border :solid green ;  */
+     width: 40%;
+     height: 100%;
+
+ }
+
  
+
+ .div-two {
+     /* border : solid purple ; */
+     height: 100%;
+     display: flex;
+     flex-direction: column;
+     justify-content: space-between;
+
+ }
+
+
+ .div-message{
+    /* border :solid green ;  */
+    width: 40%;
+    height: 100%;
+     
+ }
+
+ 
+
+ .connected-users {
+     /* border: solid green; */
+     display: flex;
+     flex-direction: column;
+     justify-content: space-between;
+    
+
+ }
+
+ .disconnected-users {
+     /* border: solid blue; */
+     display: flex;
+     flex-direction: column;
+     justify-content: space-between;
+    
+ }
+
+
+
+
+
+ .profile-picture2 {
+    border-radius: 50%;
+      height: 70px;
+      width: 70px;
+      background-size: cover;
+      
+  }
+  .profile-picture2:hover  {
+    position: relative;
+    right: 30px;
+  }
+
+  .hr {
+      border: 1px solid black;
+     
+      width: 50%;
+      margin: 10vw auto;
+  }

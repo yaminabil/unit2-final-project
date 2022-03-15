@@ -1,3 +1,4 @@
+const { Route } = require("express");
 const express = require("express");
 const { route } = require("express/lib/router");
 const Recipe = require("../models/recipe");
@@ -205,7 +206,7 @@ router.get("/:id/edit",async (req,res)=>{
 //update route 
 
 router.put("/:id" ,(req,res)=>{
-    Recipe.findByIdAndUpdate(req.params.id,req.body, {new:true}, (err,updatedRecipe)=>{
+    Recipe.findByIdAndUpdate (req.params.id, req.body, {new:true}, (err,updatedRecipe)=>{
         if(err){
 
         }else{
@@ -278,28 +279,34 @@ router.post ("/user",(req,res)=>{
 
 //login check 
 
-router.post("/user/check" ,(req,res)=>{
+router.post("/user/check" , async (req,res)=>{
     req.body.connected = false;
+    const recipes = await  Recipe.find ({user:"622f760c5fc1f8a3e512ad9d"});
     
-    User.findOne( {name:req.body.name } , (err,foundUser) =>{
+    User.findOne( {name:req.body.name } , (err,foundUser) => {
        
         if (!foundUser) {
-            const message = {
-                message: 'user not found !'}
-            res.render("users/Login.jsx" , message);
+            let message ='user not found !'
+            res.render("users/Login.jsx" ,  {
+                 message,
+                 recipes });
+            
             console.log("nooooooooo");
         } else if (foundUser && req.body.password !== foundUser.password) {
-            const message = {
-                message: 'incorrect password  !'}
-            res.render("users/Login.jsx" , message);
+            let message ='uncorrect password!'
+            res.render("users/Login.jsx" , {
+            message ,
+            recipes })
             console.log("nooooooooo");
-        
+           
 
         } else {
             foundUser.connected = true;
+
             User.findByIdAndUpdate (foundUser._id ,foundUser, {new:true},(err,updatedUser) =>{
 
                 if(err) {
+                    res.send(err);
 
                 } else {
 
@@ -450,11 +457,21 @@ router.put ("/user/:id" , async (req,res)=>{
 // show route for user profile 
 
 router.get ("/user/:id/profile" , (req,res) =>{
-    User.findById (req.params.id).then((foundUser)=>{
-        res.render("users/Profile.jsx",{user:foundUser} );
-    }).catch((err)=>{
-        res.send(err);
+    User.find({ _id: {$ne: "622f760c5fc1f8a3e512ad9d"}}  , (err,foundUsers) => {
+        if(err) {
+            res.send(err) ; 
+        }else {
+            User.findById (req.params.id).then((foundUser)=>{
+                res.render("users/Profile.jsx",{
+                    user:foundUser,
+                   users:foundUsers  } );
+            }).catch((err)=>{
+                res.send(err);
+            })
+
+        }
     })
+   
     
 })
 
@@ -519,7 +536,100 @@ router.delete("/user/recipe/:id" , (req,res) => {
     })
 })
 
+// edit route for user's recipe 
 
+
+router.get ("/user/recipe/:id/edit" , (req,res) =>{
+
+    Recipe.findById (req.params.id , (err,foundRecipe) => {
+        if(err) {
+            res.send(err);
+        }else { 
+            User.findById (foundRecipe.user , (err, foundUser) => {
+                if(err) {
+                    res.send(err); 
+                }else { 
+              
+                    res.render ( "userRecipes/Edit.jsx" ,{
+                        user:foundUser,
+                        recipe:foundRecipe
+                    })
+                
+                }
+            })
+        }
+    })
+    
+})
+
+
+// update route for user's recipes 
+
+
+
+router.put ("/user/recipe/:id" , (req,res)=> {
+
+    Recipe.findById (req.params.id , (err,foundRecipe) => {
+        if(err) {
+            res.send(err);
+        }else { 
+            User.findById (foundRecipe.user , (err, foundUser) => {
+                if(err) {
+                    res.send(err); 
+                }else { 
+              Recipe.findByIdAndUpdate (req.params.id ,req.body,{new:true},(err,updatedRecipe) => {
+                  if(err) {
+                      res.send (err) ; 
+                  }else {
+                      res.redirect(`/recipes/user/${foundUser._id}`)
+                  }
+              }) ; 
+                
+                
+                }
+            })
+        }
+    })
+
+})
+
+// edit route for profile  
+
+
+router.put ("/user/:id/profile" , (req,res)=>{
+
+      let ob = {
+          name: req.body.name ,
+          password : req.body.password,
+          fav :req.body.fav ,
+          image:req.body.image,
+          connected:true
+      }
+    console.log (req.body);
+    User.findByIdAndUpdate ( req.params.id, ob ,{new:true} , (err,updatedUser) => {
+        console.log (updatedUser);
+        res.redirect (`/recipes/user/${req.params.id}/profile`)
+    })
+})
+
+
+// delete profile    // in order to delete any profile we have to delete first all the recipes and then delete the profile
+
+router.delete ("/user/:id/profile" , (req,res) => {
+    Recipe.deleteMany ({user :req.params.id} , (err,deletedRecipes)=> { 
+        if(err) {
+            res.send(err);
+
+        }else {
+            User.findOneAndDelete( {_id:req.params.id} , (err,deletedUser)=> {
+
+                res.redirect(`/recipes/user/login`);
+
+            })
+            
+        }
+    })
+})
 
 
 module.exports=router;
