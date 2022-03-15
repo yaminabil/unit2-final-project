@@ -17,7 +17,7 @@ class New extends React.Component {
               <h2>Create Your Plate :</h2>
 
               <form action={`/recipes`} method="POST">
-                  <ul id="ul-form">
+                  <ul className="ul-form">
 
                  <li>Name: <input className="name" type="text" name="name" /><br /></li> 
                  <li>Meal:

@@ -65,14 +65,14 @@ class Profile extends React.Component {
                    <div className="connected-users">
 
                    {
-                       users.map((user)=>{
-                           if(user.connected === true) {
+                       users.map((OneUser)=>{
+                           if(OneUser.connected === true) {
                            return (
                                
-                            <a href= "" >
+                            <a href={`/recipes/user/${user._id}/profile/${OneUser._id}/message`}  >
                             <div  
                             className="profile-picture2" 
-                            style={{ backgroundImage :`url("${user.image}")` ,border :`solid ${user.fav}` ,margin:"5px"  }}  
+                            style={{ backgroundImage :`url("${OneUser.image}")` ,border :`solid ${OneUser.fav}` ,margin:"5px"  }}  
                             title="profile" />
                         </a>
                            )}
@@ -81,15 +81,15 @@ class Profile extends React.Component {
                    </div>
                    <div className="disconnected-users">
                        {
-                   users.map((user)=>{
-                       if(user.connected === false) {
+                   users.map((OneUser)=>{
+                       if(OneUser.connected === false) {
                            return (
-                            <a href= ""onClick={ function first  (user)  {return(user.name) }  >
+                            <a href={`/recipes/user/${user._id}/profile/${OneUser._id}/message`}  >
                             <div  
                             className="profile-picture2" 
-                            style={{ backgroundImage :`url("${user.image}")` , border :`solid grey ` ,margin:"5px"  }}  
-                            title="profile" />
-                        </a>
+                            style= {{ backgroundImage :`url("${OneUser.image}")` , border :`solid grey ` ,margin:"5px"  }}  
+                            title="profile" > </div>
+                             </a>
                            )
                        }
                        })

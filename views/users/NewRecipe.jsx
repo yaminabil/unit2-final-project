@@ -21,7 +21,7 @@ class New extends React.Component {
               
 
               <form action={`/recipes/user/${user._id}`} method="POST">
-                  <ul id="ul-form"  style={{ color :`${user.fav}`}}>
+                  <ul className="ul-form" style={{ color :`${user.fav}`}} >
 
                  <li>Name: <input className="name" type="text" name="name" /><br /></li> 
                  <li>Meal:

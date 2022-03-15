@@ -10,7 +10,8 @@ const userSchema = new Schema ({
     fav:String,
     image:String,
     connected:Boolean,
-    recipes: [{type: Schema.Types.ObjectId, ref: "Recipe"}]
+    messages: [{type: Schema.Types.ObjectId, ref: "Message"}] ,
+    recipes:  [{type: Schema.Types.ObjectId, ref: "Recipe" }]
 },
 {
     timestamps:true

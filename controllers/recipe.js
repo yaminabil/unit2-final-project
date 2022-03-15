@@ -1,5 +1,6 @@
 const { Route } = require("express");
 const express = require("express");
+const { append } = require("express/lib/response");
 const { route } = require("express/lib/router");
 const Recipe = require("../models/recipe");
 
@@ -383,12 +384,14 @@ router.post("/user/:id",(req,res)=>{
 
     Recipe.create(req.body ,(err,createdRecipe)=>{
         if(err){
+            res.send(err);
 
         } else {
 
             
             User.findByIdAndUpdate(req.params.id , { $addToSet: { recipes: createdRecipe._id } },{new:true},(err,updatedUser) => {
                 if(err) {
+                    res.send(err);
 
                 } else {
 
@@ -630,6 +633,90 @@ router.delete ("/user/:id/profile" , (req,res) => {
         }
     })
 })
+
+
+
+
+
+
+
+//////////messsages /////////////////////////
+
+const Message = require("../models/message");
+
+router.get ("/user/:id1/profile/:id2/message" , (req,res)=> {
+
+    User.findById (req.params.id1 , (err,foundUser1) =>{
+        if(err) {
+            res.send(err);
+        }else { 
+            User.findById (req.params.id2 , (err,foundUser2)=> {
+                if(err) {
+                    res.send(err);
+                } else { 
+                    res.render ("messages/New.jsx" , {
+                        user1 : foundUser1,
+                        user2:foundUser2
+                    });
+
+                } })
+        
+    }
+  
+})
+})
+
+
+//new message 
+
+router.post ("/user/:id1/profile/:id2" ,  (req,res) => {
+     
+
+
+ let ob = {
+     content : req.body.content,
+     user1 : req.params.id1,
+     user2 :req.params.id2
+
+ }
+    Message.create(ob , (err,createdMessage)=> {
+        if(err) {
+            res.send(err);
+                } else { 
+           
+    User.findByIdAndUpdate (req.params.id1 , { $addToSet: { messages: createdMessage._id } },{new:true}, (err,updatedUser) =>{
+                if(err){
+                    res.send(err);
+                       } else {
+                          console.log("teste1");
+                          console.log(updatedUser) ;
+
+     User.findByIdAndUpdate ( req.params.id2 ,{ $addToSet: { messages: createdMessage._id } },{new:true}, (err,updatedUser2) =>{
+          if(err) {
+                        res.send(err) ;
+                    }else {
+                        console.log("teste2");
+                        console.log(updatedUser2) ;
+                        res.redirect (`/recipes/user/${req.params.id1}/profile`);
+                       
+                    }
+                    
+                })
+            } 
+
+        })
+       }
+    })
+
+})
+
+
+
+
+    
+
+
+
 
 
 module.exports=router;
