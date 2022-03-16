@@ -484,7 +484,7 @@ router.get ("/user/:id/profile" , (req,res) =>{
         }else {
 
             ///////////////////////////////
-            User.find({ $and : [ { _id:  {$ne: "622f760c5fc1f8a3e512ad9d"} } ,  { _id:  {$ne: req.params.id} } ]}    , (err,foundUsers) => {
+            User.find({ $and : [ { _id:  {$ne: "622f760c5fc1f8a3e512ad9d"} } ,  { _id:  {$ne: req.params.id} } ] }    , (err,foundUsers) => {
                 if(err) {
                     res.send(err) ; 
                 }else {
