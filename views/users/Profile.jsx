@@ -95,7 +95,7 @@ class Profile extends React.Component {
            
                            
                              
-                             <li> {message.name1} : {message.content} </li>
+                             <li> {message.name1} : {message.content} <p style={{color : "black"}}>_{message.createdAt.toLocaleTimeString()} </p> </li>
     
                                     ))
                    
@@ -109,7 +109,7 @@ class Profile extends React.Component {
                            {
     
                            messagesSent.map((message)=>(
-                               <li>to {message.name2} : {message.content}</li>
+                               <li>to {message.name2} : {message.content}  <p style={{color : "black"}}>_{message.createdAt.toLocaleTimeString()} </p> </li>
                            ))
                            }
                        </ul>
@@ -175,7 +175,7 @@ class Profile extends React.Component {
 
 
 
-    } else if (messages  && !(messagesSent) ) {
+    } else if ( !(messages)  && messagesSent ) {
 
 
         return(
@@ -249,7 +249,7 @@ class Profile extends React.Component {
                            {
     
                            messagesSent.map((message)=>(
-                               <li>to {message.name2} : {message.content}</li>
+                               <li>to {message.name2} : {message.content} <p style={{color : "black"}}>_{message.createdAt.toLocaleTimeString()} </p>  </li>
                            ))
                            }
                        </ul>
@@ -314,7 +314,7 @@ class Profile extends React.Component {
 
 
             
-    } else if ( !(messages) && messagesSent ) {
+    } else if ( messages && !(messagesSent) ) {
 
 
 
@@ -376,9 +376,13 @@ class Profile extends React.Component {
                     <ul>
                     <h4><u>received messages</u></h4>
     
-                     {     <li> you have none</li>
+                     {
+
+                     messages.map((message)=>(
+                      <li>to {message.name2} : {message.content}   <p style={{color : "black"}}>_{message.createdAt.toLocaleTimeString()} </p> </li>
+                       )) 
                    
-                   }
+                     }
                    </ul>
                    </div>
     
@@ -387,9 +391,8 @@ class Profile extends React.Component {
                        <h4>  <u>sent messages</u> </h4> 
                            {
     
-                           messagesSent.map((message)=>(
-                               <li>to {message.name2} : {message.content}</li>
-                           ))
+                           <li></li>
+
                            }
                        </ul>
     
@@ -522,7 +525,8 @@ class Profile extends React.Component {
                 <ul>
                 <h4><u>received messages</u></h4>
 
-                 {     <li>you have none</li>
+                 {   
+                 <li></li>
                
                }
                </ul>
@@ -532,8 +536,9 @@ class Profile extends React.Component {
                    <ul>
                        <h4>  <u>sent messages</u> </h4> 
                        {
+                           <li></li>
 
-                      <li>you have none</li>
+                    
                        }
                    </ul>
 

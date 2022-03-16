@@ -22,7 +22,7 @@ class Index extends React.Component {
        
         
       
-        console.log("big testtttt ======>>>>>"+ chunk(recipes,4));
+        console.log("big testtttt ======>>>>>"+ chunk(recipes,3));
 
         let arrData = chunk(arrOfData,3) ; // split out data to small arrays of length of 3 to use the data 
     
