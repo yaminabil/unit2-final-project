@@ -1,6 +1,5 @@
 
-Description : 
-
+Description :
 
 This is simple  client server web application  , helps anyone to store his/her recipe and also contribue by sharing recipes with mycookbook community 
 
