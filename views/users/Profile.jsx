@@ -95,7 +95,7 @@ class Profile extends React.Component {
            
                            
                              
-                             <li> {message.name1} : {message.content} <p style={{color : "black"}}>_{message.createdAt.toLocaleTimeString()} </p> </li>
+                             <li> {message.name1} : {message.content}</li>
     
                                     ))
                    
@@ -109,7 +109,7 @@ class Profile extends React.Component {
                            {
     
                            messagesSent.map((message)=>(
-                               <li>to {message.name2} : {message.content}  <p style={{color : "black"}}>_{message.createdAt.toLocaleTimeString()} </p> </li>
+                               <li>to {message.name2} : {message.content} </li>
                            ))
                            }
                        </ul>
@@ -249,7 +249,7 @@ class Profile extends React.Component {
                            {
     
                            messagesSent.map((message)=>(
-                               <li>to {message.name2} : {message.content} <p style={{color : "black"}}>_{message.createdAt.toLocaleTimeString()} </p>  </li>
+                               <li>to {message.name2} : {message.content}  </li>
                            ))
                            }
                        </ul>
@@ -379,7 +379,7 @@ class Profile extends React.Component {
                      {
 
                      messages.map((message)=>(
-                      <li>to {message.name2} : {message.content}   <p style={{color : "black"}}>_{message.createdAt.toLocaleTimeString()} </p> </li>
+                      <li>to {message.name2} : {message.content}   </li>
                        )) 
                    
                      }
