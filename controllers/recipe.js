@@ -3,6 +3,7 @@ const express = require("express");
 const { append } = require("express/lib/response");
 const { route } = require("express/lib/router");
 const Recipe = require("../models/recipe");
+const Message = require("../models/message");
 
 
 
@@ -460,20 +461,65 @@ router.put ("/user/:id" , async (req,res)=>{
 // show route for user profile 
 
 router.get ("/user/:id/profile" , (req,res) =>{
-    User.find({ _id: {$ne: "622f760c5fc1f8a3e512ad9d"}}  , (err,foundUsers) => {
-        if(err) {
-            res.send(err) ; 
+
+
+  
+    
+
+
+
+    Message.find({user1:req.params.id} , (err,foundMessagesSent) => {
+        if (err) {
+            res.send(err);
         }else {
-            User.findById (req.params.id).then((foundUser)=>{
-                res.render("users/Profile.jsx",{
-                    user:foundUser,
-                   users:foundUsers  } );
-            }).catch((err)=>{
-                res.send(err);
+
+       /////////////////////////////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+
+       Message.find({user2:req.params.id} , (err,foundMessages) => {
+        if(err) {
+            res.send (err);
+        }else {
+
+            ///////////////////////////////
+            User.find({ _id: {$ne: "622f760c5fc1f8a3e512ad9d"}}  , (err,foundUsers) => {
+                if(err) {
+                    res.send(err) ; 
+                }else {
+                    User.findById (req.params.id).then((foundUser)=>{
+                        res.render("users/Profile.jsx",{
+                            user:foundUser,
+                            users:foundUsers,
+                            messages:foundMessages,
+                             messagesSent: foundMessagesSent } );
+                    }).catch((err)=>{
+                        res.send(err);
+                    })
+        
+                }
             })
+            //////////////////////////
 
         }
+    }) 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   /////////////////////////////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+        }
     })
+   
    
     
 })
@@ -642,7 +688,7 @@ router.delete ("/user/:id/profile" , (req,res) => {
 
 //////////messsages /////////////////////////
 
-const Message = require("../models/message");
+
 
 router.get ("/user/:id1/profile/:id2/message" , (req,res)=> {
 
@@ -656,7 +702,7 @@ router.get ("/user/:id1/profile/:id2/message" , (req,res)=> {
                 } else { 
                     res.render ("messages/New.jsx" , {
                         user1 : foundUser1,
-                        user2:foundUser2
+                        user2  :foundUser2
                     });
 
                 } })
@@ -673,40 +719,74 @@ router.post ("/user/:id1/profile/:id2" ,  (req,res) => {
      
 
 
- let ob = {
-     content : req.body.content,
-     user1 : req.params.id1,
-     user2 :req.params.id2
+    User.findById ({_id:req.params.id1}).then((findSender)=> {
+        User.findById ({_id:req.params.id2}).then((findReceiver)=>{
 
- }
-    Message.create(ob , (err,createdMessage)=> {
-        if(err) {
-            res.send(err);
-                } else { 
+
+
+
+
+
+
+            /////////////////////////////start //////////////////////////////////
+
+            let ob = {
+                content : req.body.content,
+                user1 : req.params.id1,
+                user2 :req.params.id2,
+                name1:findSender.name , 
+                name2:findReceiver.name
+                
            
-    User.findByIdAndUpdate (req.params.id1 , { $addToSet: { messages: createdMessage._id } },{new:true}, (err,updatedUser) =>{
-                if(err){
+            }
+
+
+            Message.create(ob , (err,createdMessage)=> {
+                if(err) {
                     res.send(err);
-                       } else {
-                          console.log("teste1");
-                          console.log(updatedUser) ;
-
-     User.findByIdAndUpdate ( req.params.id2 ,{ $addToSet: { messages: createdMessage._id } },{new:true}, (err,updatedUser2) =>{
-          if(err) {
-                        res.send(err) ;
-                    }else {
-                        console.log("teste2");
-                        console.log(updatedUser2) ;
-                        res.redirect (`/recipes/user/${req.params.id1}/profile`);
-                       
-                    }
-                    
+                        } else { 
+                   
+            User.findByIdAndUpdate (req.params.id1 , { $addToSet: { messages: createdMessage._id } },{new:true}, (err,updatedUser) =>{
+                        if(err){
+                            res.send(err);
+                               } else {
+                                  console.log("teste1");
+                                  console.log(updatedUser) ;
+        
+             User.findByIdAndUpdate ( req.params.id2 ,{ $addToSet: { messages: createdMessage._id } },{new:true}, (err,updatedUser2) =>{
+                  if(err) {
+                                res.send(err) ;
+                            }else {
+                                console.log("teste2");
+                                console.log(updatedUser2) ;
+                                res.redirect (`/recipes/user/${req.params.id1}/profile`);
+                               
+                            }
+                            
+                        })
+                    } 
+        
                 })
-            } 
+               }
+            })
 
+
+
+
+
+
+
+            /////////////////////////////end //////////////////////////////////
+        }).catch((err)=>{
+            res.send(err);
         })
-       }
+
+    }).catch((err)=> {
+        res.send(err);
     })
+
+ 
+   
 
 })
 

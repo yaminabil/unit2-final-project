@@ -316,3 +316,16 @@ h3 {
       width: 50%;
       margin: 10vw auto;
   }
+
+
+
+  .all-messages {
+      margin-top: 50px;
+      /* border: solid green; */
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+
+  }
+
+ 
