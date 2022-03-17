@@ -11,7 +11,7 @@ User can create an  account , make his/her recipes  also can chat with other use
 
 ### Screen shots :
 
-![Alt text]/Users/bilalyounes/Desktop/unit2-final-project/Discription.png
+
 
 
 
